@@ -18,9 +18,9 @@ public class Map {
     int row, col, z;
     int goalRow = 15, goalCol = 7;
     double alpha = .1;
-    double lambda = .1;
-    double epsilon = 99.95;
-    double epsilonDecay = .001;
+    double lambda = .05;
+    double epsilon = 99.9;
+    double epsilonDecay = .01;
     double gamma = .95;
     double delta;
     AI ai;
@@ -84,7 +84,7 @@ public class Map {
             colCoord = rand.nextInt(19);
         } while (rowCoord == goalRow && colCoord == goalCol);
 
-        System.out.println("Starting coordinates: " + rowCoord + "," + colCoord);
+        //System.out.println("Starting coordinates: " + rowCoord + "," + colCoord);
         ai.initialPos(rowCoord, colCoord);
         ai.initialAction(epsilon);
     }
@@ -155,6 +155,8 @@ public class Map {
             case "down":
                 eMap[aiRow][aiCol][3] = 1;
                 break;
+            case "OOB":
+                break;
         }
     }
 
@@ -189,6 +191,18 @@ public class Map {
         colPrime = ai.getColPrime();
         if (rowPrime == goalRow && colPrime == goalCol) {
             mapFinished = true;
+            if (!(epsilon <= 5)) {
+                epsilon = epsilon - epsilonDecay;
+            }
+        }
+        String action, actionPrime;
+        action = ai.getAction();
+        actionPrime = ai.getActionPrime();
+        if (action.equalsIgnoreCase("OOB") || actionPrime.equalsIgnoreCase("OOB")) {
+            mapFinished = true;
+            if (!(epsilon <= 5)) {
+                epsilon = epsilon - epsilonDecay;
+            }
         }
         gui.changeAIPos(rowPrime, colPrime);
         ai.setMove();

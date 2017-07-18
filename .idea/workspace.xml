@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9b94deef-cdec-4dcf-8490-aa29dafefee4" name="Default" comment="" />
+    <list default="true" id="9b94deef-cdec-4dcf-8490-aa29dafefee4" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GUI/GridworldGUI.java" afterPath="$PROJECT_DIR$/src/GUI/GridworldGUI.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Gridworld.java" afterPath="$PROJECT_DIR$/src/Gridworld.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Objects/AI.java" afterPath="$PROJECT_DIR$/src/Objects/AI.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Objects/Map.java" afterPath="$PROJECT_DIR$/src/Objects/Map.java" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -11,7 +17,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="DarkyenusTimeTracker">
-    <option name="totalTimeSeconds" value="25234" />
+    <option name="totalTimeSeconds" value="28264" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
@@ -19,8 +25,8 @@
       <file leaf-file-name="Gridworld.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Gridworld.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="38" column="51" lean-forward="false" selection-start-line="38" selection-start-column="51" selection-end-line="38" selection-end-column="51" />
+            <state relative-caret-position="255">
+              <caret line="39" column="16" lean-forward="false" selection-start-line="39" selection-start-column="16" selection-end-line="39" selection-end-column="16" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -31,12 +37,12 @@
       <file leaf-file-name="Map.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Objects/Map.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="175" column="23" lean-forward="false" selection-start-line="175" selection-start-column="17" selection-end-line="175" selection-end-column="23" />
+            <state relative-caret-position="334">
+              <caret line="21" column="26" lean-forward="true" selection-start-line="21" selection-start-column="26" selection-end-line="21" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1130#1131#0" expanded="true" />
-                <element signature="e#1158#1159#0" expanded="true" />
+                <element signature="e#1129#1130#0" expanded="true" />
+                <element signature="e#1157#1158#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -45,8 +51,8 @@
       <file leaf-file-name="AI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Objects/AI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="211">
-              <caret line="59" column="16" lean-forward="false" selection-start-line="59" selection-start-column="16" selection-end-line="59" selection-end-column="16" />
+            <state relative-caret-position="229">
+              <caret line="108" column="46" lean-forward="false" selection-start-line="108" selection-start-column="45" selection-end-line="108" selection-end-column="46" />
               <folding />
             </state>
           </provider>
@@ -55,8 +61,8 @@
       <file leaf-file-name="GridworldGUI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/GUI/GridworldGUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1588">
-              <caret line="101" column="54" lean-forward="true" selection-start-line="101" selection-start-column="54" selection-end-line="101" selection-end-column="54" />
+            <state relative-caret-position="374">
+              <caret line="130" column="24" lean-forward="false" selection-start-line="130" selection-start-column="24" selection-end-line="130" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -78,9 +84,16 @@
       <find>rowPrimePrime</find>
       <find>change</find>
       <find>white</find>
+      <find>invalid</find>
+      <find>epsilon</find>
+      <find>System.out.</find>
+      <find>0</find>
+      <find>System.out</find>
     </findStrings>
     <replaceStrings>
       <replace>colPrimePrime</replace>
+      <replace>-1</replace>
+      <replace>OOB</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -98,10 +111,10 @@
         <option value="$PROJECT_DIR$/src/GUI/Gridworld.form" />
         <option value="$PROJECT_DIR$/src/ObjectIO/ObjectReaderWriter.java" />
         <option value="$PROJECT_DIR$/src/ObjectIO/MapReaderWriter.java" />
-        <option value="$PROJECT_DIR$/src/Objects/AI.java" />
-        <option value="$PROJECT_DIR$/src/Gridworld.java" />
-        <option value="$PROJECT_DIR$/src/Objects/Map.java" />
         <option value="$PROJECT_DIR$/src/GUI/GridworldGUI.java" />
+        <option value="$PROJECT_DIR$/src/Gridworld.java" />
+        <option value="$PROJECT_DIR$/src/Objects/AI.java" />
+        <option value="$PROJECT_DIR$/src/Objects/Map.java" />
       </list>
     </option>
   </component>
@@ -682,15 +695,15 @@
       <option name="presentableId" value="Default" />
       <updated>1499903989401</updated>
       <workItem from="1499903991842" duration="3676000" />
-      <workItem from="1499957807204" duration="26747000" />
+      <workItem from="1499957807204" duration="32856000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30423000" />
+    <option name="totallyTimeSpent" value="36532000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -785,20 +798,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GUI/GridworldGUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1588">
-          <caret line="101" column="54" lean-forward="true" selection-start-line="101" selection-start-column="54" selection-end-line="101" selection-end-column="54" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Gridworld.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="38" column="51" lean-forward="false" selection-start-line="38" selection-start-column="51" selection-end-line="38" selection-end-column="51" />
+        <state relative-caret-position="255">
+          <caret line="39" column="16" lean-forward="false" selection-start-line="39" selection-start-column="16" selection-end-line="39" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -807,20 +810,30 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Objects/AI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="59" column="16" lean-forward="false" selection-start-line="59" selection-start-column="16" selection-end-line="59" selection-end-column="16" />
+        <state relative-caret-position="229">
+          <caret line="108" column="46" lean-forward="false" selection-start-line="108" selection-start-column="45" selection-end-line="108" selection-end-column="46" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GUI/GridworldGUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="130" column="24" lean-forward="false" selection-start-line="130" selection-start-column="24" selection-end-line="130" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Objects/Map.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="175" column="23" lean-forward="false" selection-start-line="175" selection-start-column="17" selection-end-line="175" selection-end-column="23" />
+        <state relative-caret-position="334">
+          <caret line="21" column="26" lean-forward="true" selection-start-line="21" selection-start-column="26" selection-end-line="21" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1130#1131#0" expanded="true" />
-            <element signature="e#1158#1159#0" expanded="true" />
+            <element signature="e#1129#1130#0" expanded="true" />
+            <element signature="e#1157#1158#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -1,9 +1,8 @@
 import GUI.GridworldGUI;
 import Objects.*;
 
-import java.awt.*;
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
+import java.util.Scanner;
 
 /**
  * Created by Adam Hayes on 7/12/2017 for project Gridworld.
@@ -30,13 +29,17 @@ public class Gridworld {
 
         map.newMap();
 
+        int numOfGen;
+
+        numOfGen = gui.numOfGens();
+
         boolean mapFinished;
         int mapCounter = 0;
         int moveCounter = 0;
         do {
             do {
                 try {
-                    TimeUnit.MILLISECONDS.sleep(100);
+                    TimeUnit.MILLISECONDS.sleep(20);
                 } catch (Exception e) {
                     System.out.println(e);
                 }
@@ -45,8 +48,10 @@ public class Gridworld {
                 //System.out.println(moveCounter);
             } while (!mapFinished);
             mapCounter++;
+            System.out.println("Previous Map took " + moveCounter + " moves!");
+            System.out.println("Loading in Map #" + mapCounter);
             moveCounter = 0;
             map.newEpisodeMap();
-        } while (mapCounter < 10);
+        } while (mapCounter < numOfGen);
     }
 }

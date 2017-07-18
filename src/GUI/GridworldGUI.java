@@ -127,4 +127,14 @@ public class GridworldGUI {
         }
         setGoalSpace(goalRow, goalCol);
     }
+
+    public int numOfGens() {
+        String strNumOfGenerations;
+        int numOfGenerations;
+        strNumOfGenerations = JOptionPane.showInputDialog("Number of Generations to Run \n(Positive Whole Number)");
+
+        numOfGenerations = Integer.parseInt(strNumOfGenerations);
+
+        return numOfGenerations;
+    }
 }

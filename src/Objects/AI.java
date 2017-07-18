@@ -39,6 +39,8 @@ public class AI {
 
     public String getAction() { return action; }
 
+    public String getActionPrime() { return actionPrime; }
+
     public void initialPos(int row, int col) {
         this.row = row;
         this.col = col;
@@ -58,26 +60,26 @@ public class AI {
     public void nextAction(double epsilon) {
         Random rand = new Random(System.currentTimeMillis());
         int chance = rand.nextInt(100);
-        System.out.println("Chance: " + chance);
+        //System.out.println("Chance: " + chance);
         if (chance <= (100 - epsilon)) {
             actionPrime = exploit(true);
-            System.out.println("Picked Exploit");
+            //System.out.println("Picked Exploit");
         } else if (chance > (100 - epsilon)) {
             actionPrime = explore(true);
-            System.out.println("Picked Explore");
+            //System.out.println("Picked Explore");
         }
-        if (actionPrime.equalsIgnoreCase("invalid")) {
+        /*if (actionPrime.equalsIgnoreCase("OOB")) {
             nextAction(epsilon);
-        }
+        }*/
     }
 
     public void setMove() {
-        System.out.println("Row: " + row);
-        System.out.println("Col: " + col);
-        System.out.println("Row Prime: " + rowPrime);
-        System.out.println("Col Prime: " + colPrime);
-        System.out.println("Row Prime 2: " + rowPrimePrime);
-        System.out.println("Col Prime 2: " + colPrimePrime);
+        //System.out.println("Row: " + row);
+        //System.out.println("Col: " + col);
+        //System.out.println("Row Prime: " + rowPrime);
+        //System.out.println("Col Prime: " + colPrime);
+        //System.out.println("Row Prime 2: " + rowPrimePrime);
+        //System.out.println("Col Prime 2: " + colPrimePrime);
         row = rowPrime;
         col = colPrime;
         action = actionPrime;
@@ -100,8 +102,9 @@ public class AI {
                 explore = "left";
                 if (!actionPrime) {
                     if ((col + 1) < 0 || (col + 1) > 19) {
-                        explore = "invalid";
-                        System.out.println("Invalid Move");
+                        explore = "OOB";
+                        actionValue = -1;
+                        //System.out.println("OOB Move");
                     } else {
                         actionValue = values[0];
                         rowPrime = row;
@@ -109,8 +112,9 @@ public class AI {
                     }
                 } else {
                     if ((colPrime + 1) < 0 || (colPrime + 1) > 19) {
-                        explore = "invalid";
-                        System.out.println("Invalid move");
+                        explore = "OOB";
+                        actionValuePrime = -1;
+                        //System.out.println("OOB move");
                     } else {
                         actionValuePrime = values[0];
                         rowPrimePrime = rowPrime;
@@ -122,8 +126,9 @@ public class AI {
                 explore = "right";
                 if (!actionPrime) {
                     if ((col - 1) < 0 || (col - 1) > 19) {
-                        explore = "invalid";
-                        System.out.println("Invalid Move");
+                        explore = "OOB";
+                        actionValue = -1;
+                        //System.out.println("OOB Move");
                     } else {
                         actionValue = values[1];
                         rowPrime = row;
@@ -131,8 +136,9 @@ public class AI {
                     }
                 } else {
                     if ((colPrime - 1) < 0 || (colPrime - 1) > 19) {
-                        explore = "invalid";
-                        System.out.println("Invalid move");
+                        explore = "OOB";
+                        actionValuePrime = -1;
+                        //System.out.println("OOB move");
                     } else {
                         actionValuePrime = values[1];
                         rowPrimePrime = rowPrime;
@@ -144,8 +150,9 @@ public class AI {
                 explore = "up";
                 if (!actionPrime) {
                     if ((row + 1) < 0 || (row + 1) > 19) {
-                        explore = "invalid";
-                        System.out.println("Invalid Move");
+                        explore = "OOB";
+                        actionValue = -1;
+                        //System.out.println("OOB Move");
                     } else {
                         actionValue = values[2];
                         rowPrime = row + 1;
@@ -153,8 +160,9 @@ public class AI {
                     }
                 } else {
                     if ((rowPrime + 1) < 0 || (rowPrime + 1) > 19) {
-                        explore = "invalid";
-                        System.out.println("Invalid move");
+                        explore = "OOB";
+                        actionValuePrime = -1;
+                        //System.out.println("OOB move");
                     } else {
                         actionValuePrime = values[2];
                         rowPrimePrime = rowPrime + 1;
@@ -166,8 +174,9 @@ public class AI {
                 explore = "down";
                 if (!actionPrime) {
                     if ((row - 1) < 0 || (row - 1) > 19) {
-                        explore = "invalid";
-                        System.out.println("Invalid Move");
+                        explore = "OOB";
+                        actionValue = -1;
+                        //System.out.println("OOB Move");
                     } else {
                         actionValue = values[3];
                         rowPrime = row - 1;
@@ -175,8 +184,9 @@ public class AI {
                     }
                 } else {
                     if ((rowPrime - 1) < 0 || (rowPrime - 1) > 19) {
-                        explore = "invalid";
-                        System.out.println("Invalid move");
+                        explore = "OOB";
+                        actionValuePrime = -1;
+                        //System.out.println("OOB move");
                     } else {
                         actionValuePrime = values[3];
                         rowPrimePrime = rowPrime - 1;
@@ -188,8 +198,9 @@ public class AI {
                 explore = "left";
                 if (!actionPrime) {
                     if ((col + 1) < 0 || (col + 1) > 19) {
-                        explore = "invalid";
-                        System.out.println("Invalid Move");
+                        explore = "OOB";
+                        actionValue = -1;
+                        //System.out.println("OOB Move");
                     } else {
                         actionValue = values[0];
                         rowPrime = row;
@@ -197,8 +208,9 @@ public class AI {
                     }
                 } else {
                     if ((colPrime + 1) < 0 || (colPrime + 1) > 19) {
-                        explore = "invalid";
-                        System.out.println("Invalid move");
+                        explore = "OOB";
+                        actionValuePrime = -1;
+                        //System.out.println("OOB move");
                     } else {
                         actionValuePrime = values[0];
                         rowPrimePrime = rowPrime;
@@ -206,7 +218,7 @@ public class AI {
                     }
                 }
         }
-        System.out.println("Explore Value: " + explore);
+        //System.out.println("Explore Value: " + explore);
         return explore;
     }
 
@@ -231,8 +243,9 @@ public class AI {
                 exploit = "left";
                 if (!actionPrime) {
                     if ((col + 1) < 0 || (col + 1) > 19) {
-                        exploit = "invalid";
-                        System.out.println("Invalid Move");
+                        exploit = "OOB";
+                        actionValue = -1;
+                        //System.out.println("OOB Move");
                     } else {
                         actionValue = values[0];
                         rowPrime = row;
@@ -240,8 +253,9 @@ public class AI {
                     }
                 } else {
                     if ((colPrime + 1) < 0 || (colPrime + 1) > 19) {
-                        exploit = "invalid";
-                        System.out.println("Invalid move");
+                        exploit = "OOB";
+                        actionValuePrime = -1;
+                        //System.out.println("OOB move");
                     } else {
                         actionValuePrime = values[0];
                         rowPrimePrime = rowPrime;
@@ -253,8 +267,9 @@ public class AI {
                 exploit = "right";
                 if (!actionPrime) {
                     if ((col - 1) < 0 || (col - 1) > 19) {
-                        exploit = "invalid";
-                        System.out.println("Invalid Move");
+                        exploit = "OOB";
+                        actionValue = -1;
+                        //System.out.println("OOB Move");
                     } else {
                         actionValue = values[1];
                         rowPrime = row;
@@ -262,8 +277,9 @@ public class AI {
                     }
                 } else {
                     if ((colPrime - 1) < 0 || (colPrime - 1) > 19) {
-                        exploit = "invalid";
-                        System.out.println("Invalid move");
+                        exploit = "OOB";
+                        actionValuePrime = -1;
+                        //System.out.println("OOB move");
                     } else {
                         actionValuePrime = values[1];
                         rowPrimePrime = rowPrime;
@@ -275,8 +291,9 @@ public class AI {
                 exploit = "up";
                 if (!actionPrime) {
                     if ((row + 1) < 0 || (row + 1) > 19) {
-                        exploit = "invalid";
-                        System.out.println("Invalid Move");
+                        exploit = "OOB";
+                        actionValue = -1;
+                        //System.out.println("OOB Move");
                     } else {
                         actionValue = values[2];
                         rowPrime = row + 1;
@@ -284,8 +301,9 @@ public class AI {
                     }
                 } else {
                     if ((rowPrime + 1) < 0 || (rowPrime + 1) > 19) {
-                        exploit = "invalid";
-                        System.out.println("Invalid move");
+                        exploit = "OOB";
+                        actionValuePrime = -1;
+                        //System.out.println("OOB move");
                     } else {
                         actionValuePrime = values[2];
                         rowPrimePrime = rowPrime + 1;
@@ -297,8 +315,9 @@ public class AI {
                 exploit = "down";
                 if (!actionPrime) {
                     if ((row - 1) < 0 || (row - 1) > 19) {
-                        exploit = "invalid";
-                        System.out.println("Invalid Move");
+                        exploit = "OOB";
+                        actionValue = -1;
+                        //System.out.println("OOB Move");
                     } else {
                         actionValue = values[3];
                         rowPrime = row - 1;
@@ -306,8 +325,9 @@ public class AI {
                     }
                 } else {
                     if ((rowPrime - 1) < 0 || (rowPrime - 1) > 19) {
-                        exploit = "invalid";
-                        System.out.println("Invalid move");
+                        exploit = "OOB";
+                        actionValuePrime = -1;
+                        //System.out.println("OOB move");
                     } else {
                         actionValuePrime = values[3];
                         rowPrimePrime = rowPrime - 1;
@@ -319,8 +339,9 @@ public class AI {
                 exploit = "left";
                 if (!actionPrime) {
                     if ((col + 1) < 0 || (col + 1) > 19) {
-                        exploit = "invalid";
-                        System.out.println("Invalid Move");
+                        exploit = "OOB";
+                        actionValue = -1;
+                        //System.out.println("OOB Move");
                     } else {
                         actionValue = values[0];
                         rowPrime = row;
@@ -328,8 +349,9 @@ public class AI {
                     }
                 } else {
                     if ((colPrime + 1) < 0 || (colPrime + 1) > 19) {
-                        exploit = "invalid";
-                        System.out.println("Invalid move");
+                        exploit = "OOB";
+                        actionValuePrime = -1;
+                        //System.out.println("OOB move");
                     } else {
                         actionValuePrime = values[0];
                         rowPrimePrime = rowPrime;
