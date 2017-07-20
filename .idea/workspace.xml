@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9b94deef-cdec-4dcf-8490-aa29dafefee4" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GUI/GridworldGUI.java" afterPath="$PROJECT_DIR$/src/GUI/GridworldGUI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Gridworld.java" afterPath="$PROJECT_DIR$/src/Gridworld.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Objects/AI.java" afterPath="$PROJECT_DIR$/src/Objects/AI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Objects/Map.java" afterPath="$PROJECT_DIR$/src/Objects/Map.java" />
-    </list>
+    <list default="true" id="9b94deef-cdec-4dcf-8490-aa29dafefee4" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,7 +11,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="DarkyenusTimeTracker">
-    <option name="totalTimeSeconds" value="28264" />
+    <option name="totalTimeSeconds" value="28385" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
