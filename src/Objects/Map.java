@@ -18,11 +18,13 @@ public class Map {
     int row, col, z;
     int goalRow = 15, goalCol = 7;
     double alpha = .1;
-    double lambda = .05;
-    double epsilon = 99.9;
-    double epsilonDecay = .01;
-    double gamma = .95;
+    double lambda = .2;
+    double epsilon = 95.0;
+    double epsilonDecay = .02;
+    double gamma = .98;
     double delta;
+    int wallCounter = 0;
+    int goalCounter = 0;
     AI ai;
     GridworldGUI gui;
 
@@ -39,6 +41,14 @@ public class Map {
         qMap = map.getQMap();
         eMap = map.getEMap();
     }
+
+    public int getWallCounter() { return wallCounter; }
+
+    public int getGoalCounter() { return goalCounter; }
+
+    public void resetWallCounter() { wallCounter = 0; }
+
+    public void resetGoalCounter() { goalCounter = 0; }
 
     public double[][][] getQMap() { return qMap; }
 
@@ -64,13 +74,14 @@ public class Map {
         //TODO: Generate randomly small values for Q on a brand new map
         //DO NOT USE for maps between episodes!!!
         Random rand = new Random(System.currentTimeMillis());
-        double min = .00001;
-        double max = .0003;
+        double min = .0001;
+        double max = .0002;
 
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
                 for (int k = 0; k < z; k++) {
-                    double weight = (rand.nextDouble() * ((max - min) + min));
+                    double weight = ((rand.nextDouble() * (max - min)) + min);
+                    System.out.println("Weight: " + weight);
                     qMap[i][j][k] = weight;
                     eMap[i][j][k] = 0;
                 }
@@ -111,6 +122,29 @@ public class Map {
             colCoord = rand.nextInt(19);
         } while (rowCoord == goalRow && colCoord == goalCol);
 
+        double maxValue;
+        int maxIndex = 0;
+        maxValue = -10;
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                for (int k = 0; k < z; k++) {
+                    if (qMap[i][j][k] > maxValue) {
+                        maxValue = qMap[i][j][k];
+                        maxIndex = k;
+                    }
+                }
+                gui.setArrow(i, j, maxIndex);
+                maxValue = -10;
+                maxIndex = 0;
+            }
+        }
+
+        System.out.println("Times Explored last map: " + ai.getExploreCounter());
+        System.out.println("Times Exploited last map: " + ai.getExploitCounter());
+
+        ai.resetExploitCounter();
+        ai.resetExploreCounter();
+
         gui.newEpisode(row, col);
         ai.initialPos(rowCoord, colCoord);
         gui.setInitAIPos(rowCoord, colCoord);
@@ -121,6 +155,9 @@ public class Map {
         int rowPrime, colPrime;
         int reward;
         double actionValue, actionValuePrime;
+        String actionPrime, action;
+        action = ai.getAction();
+        actionPrime = ai.getActionPrime();
         actionValue = ai.getActionValue();
         actionValuePrime = ai.getActionValuePrime();
         rowPrime = ai.getRowPrime();
@@ -128,11 +165,14 @@ public class Map {
 
         if (rowPrime == goalRow && colPrime == goalCol) {
             reward = 1;
+        } else if (action.equalsIgnoreCase("OOB")) {
+            reward = -1;
         } else {
             reward = 0;
         }
 
         delta = ( (reward) + (gamma * ((actionValuePrime) - (actionValue)) ) );
+        //System.out.println("Delta = " + delta);
     }
 
     private void updateEMapMove() {
@@ -190,16 +230,35 @@ public class Map {
         rowPrime = ai.getRowPrime();
         colPrime = ai.getColPrime();
         if (rowPrime == goalRow && colPrime == goalCol) {
+            goalCounter++;
+            double[] temp;
+            System.out.println("Direction taken to goal: " + ai.getAction());
+            System.out.println("Delta at Goal: " + delta);
+            temp = this.getIndexValues(goalRow, goalCol - 1);
+            System.out.println("Values of Goal Space above goal: \nLeft Q value: " + temp[0] + "\nRight Q value: " + temp[1]
+             + "\nUp Q value: " + temp[2] + "\nDown Q value: " + temp[3]);
+            temp = this.getIndexValues(goalRow - 1, goalCol);
+            System.out.println("Values of Goal Space left of goal: \nLeft Q value: " + temp[0] + "\nRight Q value: " + temp[1]
+                    + "\nUp Q value: " + temp[2] + "\nDown Q value: " + temp[3]);
+            temp = this.getIndexValues(goalRow, goalCol + 1);
+            System.out.println("Values of Goal Space below goal: \nLeft Q value: " + temp[0] + "\nRight Q value: " + temp[1]
+                    + "\nUp Q value: " + temp[2] + "\nDown Q value: " + temp[3]);
+            temp = this.getIndexValues(goalRow + 1, goalCol);
+            System.out.println("Values of Goal Space right of goal: \nLeft Q value: " + temp[0] + "\nRight Q value: " + temp[1]
+                    + "\nUp Q value: " + temp[2] + "\nDown Q value: " + temp[3]);
+
             mapFinished = true;
             if (!(epsilon <= 5)) {
                 epsilon = epsilon - epsilonDecay;
             }
         }
-        String action, actionPrime;
+        String action;
         action = ai.getAction();
-        actionPrime = ai.getActionPrime();
-        if (action.equalsIgnoreCase("OOB") || actionPrime.equalsIgnoreCase("OOB")) {
+        if (action.equalsIgnoreCase("OOB")) {
+            wallCounter++;
             mapFinished = true;
+
+            //System.out.println("Direction outside of Wall: " + action + "\n");
             if (!(epsilon <= 5)) {
                 epsilon = epsilon - epsilonDecay;
             }

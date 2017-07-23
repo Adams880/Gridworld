@@ -1,6 +1,7 @@
 import GUI.GridworldGUI;
 import Objects.*;
 
+import javax.swing.*;
 import java.util.concurrent.TimeUnit;
 import java.util.Scanner;
 
@@ -36,10 +37,11 @@ public class Gridworld {
         boolean mapFinished;
         int mapCounter = 0;
         int moveCounter = 0;
+        int avgMoves = 0;
         do {
             do {
                 try {
-                    TimeUnit.MILLISECONDS.sleep(20);
+                    TimeUnit.MILLISECONDS.sleep(10);
                 } catch (Exception e) {
                     System.out.println(e);
                 }
@@ -48,10 +50,19 @@ public class Gridworld {
                 //System.out.println(moveCounter);
             } while (!mapFinished);
             mapCounter++;
-            System.out.println("Previous Map took " + moveCounter + " moves!");
+            avgMoves += moveCounter;
+            if ((mapCounter % 10) == 0) {
+                System.out.println("Total Number of Walls hit in last 10 runs: " + map.getWallCounter());
+                System.out.println("Total Number of Goals Found in last 10 runs: " + map.getGoalCounter());
+                System.out.println("Average number of steps in last 10 runs: " + (avgMoves / 10));
+                map.resetGoalCounter();
+                map.resetWallCounter();
+                avgMoves = 0;
+            }
             System.out.println("Loading in Map #" + mapCounter);
             moveCounter = 0;
             map.newEpisodeMap();
         } while (mapCounter < numOfGen);
+        gui.showFinished();
     }
 }

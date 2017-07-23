@@ -27,11 +27,32 @@ public class GridworldGUI {
     Color aiColor = new Color(0,120,255);
     Color goalColor = new Color(253,102,0);
     Color wallColor = Color.darkGray;
+    ImageIcon left = new ImageIcon("LeftArrow.png");
+    ImageIcon right = new ImageIcon("RightArrow.png");
+    ImageIcon up = new ImageIcon("UpArrow.png");
+    ImageIcon down = new ImageIcon("DownArrow.png");
 
     public GridworldGUI(int row, int col, int numOfWalls) {
         wallRows = new int[numOfWalls];
         wallCols = new int[numOfWalls];
         gridworld = new JPanel();
+
+        Image temp = left.getImage();
+        Image newTemp = temp.getScaledInstance(45, 45, Image.SCALE_SMOOTH);
+        left = new ImageIcon(newTemp);
+
+        temp = right.getImage();
+        newTemp = temp.getScaledInstance(45, 45, Image.SCALE_SMOOTH);
+        right = new ImageIcon(newTemp);
+
+        temp = up.getImage();
+        newTemp = temp.getScaledInstance(45, 45, Image.SCALE_SMOOTH);
+        up = new ImageIcon(newTemp);
+
+        temp = down.getImage();
+        newTemp = temp.getScaledInstance(45, 45, Image.SCALE_SMOOTH);
+        down = new ImageIcon(newTemp);
+
 
         title = new JPanel(new BorderLayout());
         title.setBounds(10, 10, 100, 100);
@@ -86,6 +107,24 @@ public class GridworldGUI {
         frame.repaint();*/
     }
 
+    public void setArrow(int row, int col, int direction) {
+        switch (direction) {
+            case 0:
+                grid[row][col].setIcon(left);
+                break;
+            case 1:
+                grid[row][col].setIcon(right);
+                break;
+            case 2:
+                grid[row][col].setIcon(up);
+                break;
+            case 3:
+                grid[row][col].setIcon(down);
+                break;
+        }
+
+    }
+
     public void setInitAIPos(int aiRow, int aiCol) {
         this.aiCol = aiCol;
         this.aiRow = aiRow;
@@ -136,5 +175,9 @@ public class GridworldGUI {
         numOfGenerations = Integer.parseInt(strNumOfGenerations);
 
         return numOfGenerations;
+    }
+
+    public void showFinished() {
+        JOptionPane.showMessageDialog(frame, "Finished");
     }
 }
