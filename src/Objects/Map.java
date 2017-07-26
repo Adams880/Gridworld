@@ -20,8 +20,8 @@ public class Map {
     double alpha = .1;
     double lambda = .2;
     double epsilon = 95.0;
-    double epsilonDecay = .02;
-    double gamma = .98;
+    double epsilonDecay = .05;
+    double gamma = .9;
     double delta;
     int wallCounter = 0;
     int goalCounter = 0;
@@ -63,6 +63,7 @@ public class Map {
     }
 
     public double[] getIndexValues(int row, int col) {
+        //returns an array of all the q values at a specific point on the map
         double[] values = new double[z];
         for (int i = 0; i < z; i++) {
             values[i] = qMap[row][col][i];
@@ -81,10 +82,38 @@ public class Map {
             for (int j = 0; j < col; j++) {
                 for (int k = 0; k < z; k++) {
                     double weight = ((rand.nextDouble() * (max - min)) + min);
-                    System.out.println("Weight: " + weight);
+                    //System.out.println("Weight: " + weight);
                     qMap[i][j][k] = weight;
                     eMap[i][j][k] = 0;
                 }
+            }
+        }
+
+        double maxValue;
+        int maxIndex = 0;
+        maxValue = -10;
+        int arrowSize;
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                for (int k = 0; k < z; k++) {
+                    if (qMap[i][j][k] > maxValue) {
+                        maxValue = qMap[i][j][k];
+                        maxIndex = k;
+                    }
+                }
+                if (maxValue > .6) {
+                    arrowSize = 2;
+                } else if (maxValue > .3) {
+                    arrowSize = 1;
+                } else {
+                    arrowSize = 0;
+                }
+                if (i == goalRow && j == goalCol) {
+                    arrowSize = 2;
+                }
+                gui.setArrow(i, j, maxIndex, arrowSize);
+                maxValue = -10;
+                maxIndex = 0;
             }
         }
 
@@ -125,6 +154,7 @@ public class Map {
         double maxValue;
         int maxIndex = 0;
         maxValue = -10;
+        int arrowSize;
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
                 for (int k = 0; k < z; k++) {
@@ -133,7 +163,17 @@ public class Map {
                         maxIndex = k;
                     }
                 }
-                gui.setArrow(i, j, maxIndex);
+                if (maxValue > .98) {
+                    arrowSize = 2;
+                } else if (maxValue > .7) {
+                    arrowSize = 1;
+                } else {
+                    arrowSize = 0;
+                }
+                if (i == goalRow && j == goalCol) {
+                    arrowSize = 2;
+                }
+                gui.setArrow(i, j, maxIndex, arrowSize);
                 maxValue = -10;
                 maxIndex = 0;
             }
@@ -152,12 +192,13 @@ public class Map {
     }
 
     private void findDelta() {
+        //calculates delta from the given algorithm.
         int rowPrime, colPrime;
         int reward;
         double actionValue, actionValuePrime;
-        String actionPrime, action;
+        String action;
         action = ai.getAction();
-        actionPrime = ai.getActionPrime();
+        //actionPrime = ai.getActionPrime();
         actionValue = ai.getActionValue();
         actionValuePrime = ai.getActionValuePrime();
         rowPrime = ai.getRowPrime();
@@ -176,11 +217,16 @@ public class Map {
     }
 
     private void updateEMapMove() {
+        //updates the emap for the previous move made
         int aiRow, aiCol;
         String action;
         aiRow = ai.getRow();
         aiCol = ai.getCol();
         action = ai.getAction();
+        if (action.equalsIgnoreCase("OOB")) {
+            //need this to make sure the direction that took the ai out of bounds is given the proper values
+            action = ai.getOobAction();
+        }
 
         switch (action) {
             case "left":
@@ -195,12 +241,11 @@ public class Map {
             case "down":
                 eMap[aiRow][aiCol][3] = 1;
                 break;
-            case "OOB":
-                break;
         }
     }
 
     private void updateAllStates() {
+        //updates both the emap and qmaps for every state and action
         for (int i = 0; i < row; i++)  {
             for (int j = 0; j < col; j++) {
                 for (int k = 0; k < z; k++) {
@@ -214,13 +259,7 @@ public class Map {
     }
 
     public boolean makeMove() {
-        /*TODO: Make a move to a new state in the gridworld
-            ADD: Change GUI color to new location
-            ADD: Add heatmap value for moves
-            ADD: Set new values for S and S'  (Maybe handle in AI)
-            ADD: Set new values for A and A'  (Maybe handle in AI)
-         */
-
+        //handles the logic for moving the AI to the next move
         boolean mapFinished = false;
         ai.nextAction(epsilon);
         findDelta();
@@ -230,8 +269,9 @@ public class Map {
         rowPrime = ai.getRowPrime();
         colPrime = ai.getColPrime();
         if (rowPrime == goalRow && colPrime == goalCol) {
+            //if win
             goalCounter++;
-            double[] temp;
+            /*double[] temp;
             System.out.println("Direction taken to goal: " + ai.getAction());
             System.out.println("Delta at Goal: " + delta);
             temp = this.getIndexValues(goalRow, goalCol - 1);
@@ -245,9 +285,10 @@ public class Map {
                     + "\nUp Q value: " + temp[2] + "\nDown Q value: " + temp[3]);
             temp = this.getIndexValues(goalRow + 1, goalCol);
             System.out.println("Values of Goal Space right of goal: \nLeft Q value: " + temp[0] + "\nRight Q value: " + temp[1]
-                    + "\nUp Q value: " + temp[2] + "\nDown Q value: " + temp[3]);
+                    + "\nUp Q value: " + temp[2] + "\nDown Q value: " + temp[3]);*/
 
             mapFinished = true;
+            gui.addGoalFound();
             if (!(epsilon <= 5)) {
                 epsilon = epsilon - epsilonDecay;
             }
@@ -255,6 +296,7 @@ public class Map {
         String action;
         action = ai.getAction();
         if (action.equalsIgnoreCase("OOB")) {
+            //if stepping out of bounds
             wallCounter++;
             mapFinished = true;
 
@@ -265,6 +307,7 @@ public class Map {
         }
         gui.changeAIPos(rowPrime, colPrime);
         ai.setMove();
+        gui.addMove();
         return mapFinished;
     }
 }

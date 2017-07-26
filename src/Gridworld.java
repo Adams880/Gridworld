@@ -1,9 +1,7 @@
 import GUI.GridworldGUI;
 import Objects.*;
 
-import javax.swing.*;
 import java.util.concurrent.TimeUnit;
-import java.util.Scanner;
 
 /**
  * Created by Adam Hayes on 7/12/2017 for project Gridworld.
@@ -38,10 +36,11 @@ public class Gridworld {
         int mapCounter = 0;
         int moveCounter = 0;
         int avgMoves = 0;
+        int totalAverageMoves = 0;
         do {
             do {
                 try {
-                    TimeUnit.MILLISECONDS.sleep(10);
+                    TimeUnit.MILLISECONDS.sleep(gui.getCurrentSpeed());
                 } catch (Exception e) {
                     System.out.println(e);
                 }
@@ -55,14 +54,18 @@ public class Gridworld {
                 System.out.println("Total Number of Walls hit in last 10 runs: " + map.getWallCounter());
                 System.out.println("Total Number of Goals Found in last 10 runs: " + map.getGoalCounter());
                 System.out.println("Average number of steps in last 10 runs: " + (avgMoves / 10));
+                totalAverageMoves += (avgMoves / 10);
                 map.resetGoalCounter();
                 map.resetWallCounter();
                 avgMoves = 0;
             }
             System.out.println("Loading in Map #" + mapCounter);
             moveCounter = 0;
+            gui.resetMoves();
+            gui.addCompletion();
             map.newEpisodeMap();
         } while (mapCounter < numOfGen);
+        System.out.println("\nThe total average steps for this run was: " + (totalAverageMoves / (mapCounter / 10)));
         gui.showFinished();
     }
 }
