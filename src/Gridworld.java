@@ -33,6 +33,8 @@ public class Gridworld {
         numOfGen = gui.numOfGens();
 
         boolean mapFinished;
+        int[] avgStepData = new int[(numOfGen / 10)];
+        int avgStepCounter = 0;
         int mapCounter = 0;
         int moveCounter = 0;
         int avgMoves = 0;
@@ -54,6 +56,8 @@ public class Gridworld {
                 System.out.println("Total Number of Walls hit in last 10 runs: " + map.getWallCounter());
                 System.out.println("Total Number of Goals Found in last 10 runs: " + map.getGoalCounter());
                 System.out.println("Average number of steps in last 10 runs: " + (avgMoves / 10));
+                avgStepData[avgStepCounter] = (avgMoves / 10);
+                avgStepCounter++;
                 totalAverageMoves += (avgMoves / 10);
                 map.resetGoalCounter();
                 map.resetWallCounter();
@@ -66,6 +70,9 @@ public class Gridworld {
             map.newEpisodeMap();
         } while (mapCounter < numOfGen);
         System.out.println("\nThe total average steps for this run was: " + (totalAverageMoves / (mapCounter / 10)));
+        for (int i = 0; i < avgStepData.length; i++) {
+            System.out.println(avgStepData[i]);
+        }
         gui.showFinished();
     }
 }
